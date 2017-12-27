@@ -1,0 +1,40 @@
+<div class="row op animated fadeInRight">
+    <div class="col-md-10">
+        <span>Search:&nbsp;&nbsp;</span>
+        <input type="text" class="form-control search" placeholder="Tìm Kiếm">
+    </div>
+    <div class="col-md-2 pull-right">
+        <div>
+            <button type="button" class="btn btn-success" (click)="lgmodal.show()">
+        <i class="fa fa-plus"></i> Tạo</button>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead class="hidden-xs">
+        <tr>
+            <th>
+                <div class="col-md-1">STT</div>
+                <div class="col-md-5">Tên Danh Mục</div>
+                <div class="col-md-4">Ngày Tạo</div>
+                <div class="col-md-2">Chức Năng</div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let category of listCategory; let i = index;">
+            <td>
+                <div class="col-md-1">{{i+1}}</div>
+                <div class="col-md-5">{{category.categoryName}}</div>
+                <div class="col-md-4">{{category.createDate | date : "dd/MM/yyyy"}}</div>
+                <div class="col-md-2">
+                    <a class="btn btn-primary" [routerLink]="['/category',category.categoryId,'edit']"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Sửa</a>
+                    <button class="btn btn-danger" (click)="removeSchedule()"><i class="fa fa-trash" aria-hidden="true"></i>Xóa</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Modal -->

@@ -1,0 +1,97 @@
+<div id="wrapper" class="wrapper" [class.is-hide-aside-big]="hideAsideInBig"  [class.is-hide-aside-small]="hideAsideInSmall">
+<header class="topnavbar-wrapper">
+  <nav role="navigation" class="navbar topnavbar">
+    <div class="navbar-header">
+      <div class="navbar-brand text-white" routerLink="/dashboard/disarmed">WebSite Bóng Đá</div>
+    </div>
+    <div class="nav-wrapper" >
+      <ul class="nav navbar-nav">
+        <li>
+          <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+          <a class="hidden-xs" (click)="hideAsideInBig = !hideAsideInBig">
+            <em class="fa fa-navicon"></em>
+          </a>
+          <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+          <a  class="visible-xs sidebar-toggle" (click)="hideAsideInSmall = !hideAsideInSmall">
+            <em class="fa fa-navicon"></em>
+          </a>
+        </li>
+        <li routerLink="/dashboard/user" routerLinkActive="active">
+          <a>
+            <i class="fa fa-user"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="visible-lg" (click)="doFullScreen()" title="fullscreen">
+          <a>
+            <em class="fa fa-expand"></em>
+          </a>
+        </li>
+        <li (click)="logout()" title="logout">
+          <a>
+            <em class="fa fa-sign-out"></em>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<aside class="aside">
+  <div class="aside-inner left-bar">
+    <nav class="sidebar">
+      <ul class="nav">
+        <li routerLink="/home/category" routerLinkActive="active" title="photo">
+          <a>
+            <em class="fa fa-picture-o"></em>
+            <span class="hidden-xs">Danh Mục</span>
+          </a>
+        </li>
+        <li routerLink="/home/news" routerLinkActive="active" title="music">
+          <a>
+            <em class="fa fa-music"></em>
+            <span class="hidden-xs">Tin Tức</span>
+          </a>
+        </li>
+        <li routerLink="/home/images" routerLinkActive="active" title="music">
+          <a>
+            <em class="fa fa-music"></em>
+            <span class="hidden-xs">Hình Ảnh</span>
+          </a>
+        </li>
+        <li routerLink="/home/videos" routerLinkActive="active" title="video">
+          <a>
+            <em class="fa fa-video-camera"></em>
+            <span class="hidden-xs">Videos</span>
+          </a>
+        </li>
+        <li routerLink="/home/schedule" routerLinkActive="active" title="story">
+          <a>
+            <em class="fa fa-book"></em>
+            <span class="hidden-xs">Lịch Thi Đấu</span>
+          </a>
+        </li>
+        <li routerLink="/home/fire-reset" routerLinkActive="active" title="story">
+          <a>
+            <em class="fa fa-book"></em>
+            <span class="hidden-xs">Bảng Xếp Hạng</span>
+          </a>
+        </li>
+        <li routerLink="/home/fire-reset" routerLinkActive="active" title="story">
+          <a>
+            <em class="fa fa-book"></em>
+            <span class="hidden-xs">Livestream</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</aside>
+<section class="section">
+  <div class="content-wrapper">
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</section>
+</div>

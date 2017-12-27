@@ -1,0 +1,57 @@
+<div class="row op animated fadeInRight">
+  <div class="col-md-8">
+    <span>Search:&nbsp;&nbsp;</span>
+    <input type="text" class="form-control search" placeholder="Tìm Kiếm">
+  </div>
+  <div class="col-md-4 pull-right">
+    <div>
+      <select class="form-control" (change)="onChangeCategory($event.target.value)">
+        <option *ngFor="let category of listCategory" [value]="category._links.fixtures.href" >
+          {{category.caption}}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <table class="table table-bordered">
+    <thead>
+      <tr style="background-color: #55FF7F">
+        <th>
+          <div class="col-md-2 text-center">Thời Gian</div>
+          <div class="col-md-4 text-center">Trận Đấu</div>
+          <div class="col-md-4 text-center">Kết Quả</div>
+          <div class="col-md-2 text-center">Trực Tiếp</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background-color: #7FFF7F">
+        <th>
+          <div class="col-md-12">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">Sân Nhà</div>
+            <div class="col-md-2">Sân Khách</div>
+            <div class="col-md-2">Chủ Nhà</div>
+            <div class="col-md-2">Khách</div>
+            <div class="col-md-2"></div>
+          </div>
+        </th>
+      </tr>
+      <tr *ngFor="let match of listSchedule">
+        <td>
+          <h4 class="text-center">Vòng {{match.matchday}}</h4>
+          <div class="col-md-12" *ngFor="let fixtures of match.fixtures" style="padding: 10px 0px;">
+            <div class="col-md-2">{{fixtures.date | date : 'dd-MM-yyyy HH:mm'}}</div>
+            <div class="col-md-2">{{fixtures.homeTeamName}}</div>
+            <div class="col-md-2">{{fixtures.awayTeamName}}</div>
+            <div class="col-md-2">{{fixtures.result.goalsHomeTeam}}</div>
+            <div class="col-md-2">{{fixtures.result.goalsAwayTeam}}</div>
+            <div class="col-md-2"></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

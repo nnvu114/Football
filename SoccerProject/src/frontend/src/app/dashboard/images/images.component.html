@@ -1,0 +1,93 @@
+<div class="row op animated fadeInRight">
+    <div class="col-md-5">
+        <div class="input-group add-on">
+            <input class="form-control" #titleInput placeholder="Search" name="srch-term" id="srch-term" type="text">
+            <div class="input-group-btn">
+                <button class="btn btn-default" (click)="searchContentTitle(titleInput.value)"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+        <div class="col-md-12">
+            <select class="form-control" id="sel1" (change)="filterChangedCategory($event.target.value)">
+                <option *ngFor="let category of listCategory" [attr.value]="category.categoryId">{{category.categoryName}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-2 pull-right">
+        <div>
+            <button type="button" class="btn btn-success" routerLink="/home/images/create">
+        <i class="fa fa-plus"></i> Tạo</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="statusDelete" class="alert alert-success alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>Thông Công!</strong> {{messageDelete}}.
+</div>
+<div *ngIf="statusDelete === false" class="alert alert-danger alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>Thất bại!</strong> {{messageDelete}}.
+</div>
+<div class="row op animated fadeInRight">
+    <div class="col-md-12 content-main">
+        <table class="table table-bordered table-hover">
+            <thead class="hidden-xs">
+                <tr>
+                    <th>
+                        <div class="col-md-1">STT</div>
+                        <div class="col-md-3">Tiêu Đề</div>
+                        <div class="col-md-2">Hình Ảnh</div>
+                        <div class="col-md-2">Link Ảnh</div>
+                        <div class="col-md-2">Ngày Tạo</div>
+                        <div class="col-md-2">Chức Năng</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let image of listImages; let i = index;">
+                    <td>
+                        <div class="col-md-1">{{i +1}}</div>
+                        <div class="col-md-3 fade-container wrapword">{{image.imageTitle}}
+                            <div class="fade"></div>
+                        </div>
+                        <div class="col-md-2">
+                          <img src="{{image.link}}" class="img-rounded" alt="Cinque Terre" width="100%" height="100%">
+                        </div>
+                        <div class="col-md-2 wrapword">{{image.link}}</div>
+                        <div class="col-md-2 fade-container">
+                          {{image.createDate | date}}
+                        </div>
+                        <div>
+                            <a class="btn btn-primary" [routerLink]="['/home/images',image.imageId,'edit']"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Sửa</a>
+                            <button class="btn btn-danger" (click)="deleteNews(image.imageId)"><i class="fa fa-trash" aria-hidden="true"></i>Xóa</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-12 content-main">
+        <!-- pager -->
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(1)">First</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                <a (click)="setPage(page)">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.currentPage + 1)">Next</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.totalPages)">Last</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- Modal -->

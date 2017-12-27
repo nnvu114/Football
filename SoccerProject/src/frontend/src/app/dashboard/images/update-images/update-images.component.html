@@ -1,0 +1,68 @@
+<div class="row text-center">
+  <div class="col-md-12">
+    <h2 *ngIf="!editStatus"><strong class="text-uppercase">Tạo Hình Ảnh</strong></h2>
+    <h2 *ngIf="editStatus"><strong class="text-uppercase">Chỉnh Sửa Hình Ảnh</strong></h2>
+  </div>
+</div>
+
+<div *ngIf="statusUpdate" class="alert alert-success alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>Thông báo!</strong> {{messageUpdate}}.
+</div>
+<div *ngIf="statusUpdate === false" class="alert alert-danger alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>Thông báo!</strong> {{messageUpdate}}.
+</div>
+
+<div class="op animated fadeInRight row">
+  <form [formGroup]="createImageForm" (ngSubmit)="doUpdateImage($event)">
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="email">Tên Tiêu Đề <span class="importand-contend">(*)</span></label>
+        <input formControlName="imagetitle" type="text" class="form-control" id="email">
+      </div>
+    </div>
+
+    <div *ngIf="editStatus" class="col-md-12">
+      <div class="form-group">
+        <label for="email">Hình Ảnh Củ</label>
+        <br>
+        <img style="width: 200px;" src="{{linkImageOld}}"/>
+      </div>
+    </div>
+
+    <div *ngIf="!editStatus" class="col-md-12">
+      <div class="form-group">
+        <label for="email">Hình Ảnh<span class="importand-contend">(*)</span></label>
+        <input style="display: block" (change)="onChange($event, showFileNames)" type="file" multiple>
+         <p #showFileNames></p>
+      </div>
+    </div>
+
+    <div *ngIf="editStatus" class="col-md-12">
+      <div class="form-group">
+        <label for="email">Hình Ảnh<span class="importand-contend">(*)</span></label>
+        <input style="display: block" (change)="onUploadFile($event, showFileNames)" type="file">
+         <p #showFileNames></p>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="sel1">Trạng Thái <span class="importand-contend">(*)</span></label>
+        <select formControlName="statusImages" class="form-control" id="sel1">
+          <option value="1">Hiển Thị</option>
+          <option value="2">Ẩn</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-12 text-center">
+      <button *ngIf="!editStatus" type="submit" [disabled]="!createImageForm.valid" class="btn btn-success">Tạo Mới</button>
+      <button *ngIf="editStatus" type="submit" [disabled]="!createImageForm.valid" class="btn btn-success">Cập Nhật</button>
+    </div>
+  </form>
+</div>
+
+<!-- Modal -->

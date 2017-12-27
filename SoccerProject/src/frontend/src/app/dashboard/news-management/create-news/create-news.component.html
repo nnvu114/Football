@@ -1,0 +1,101 @@
+<div class="row text-center">
+  <div class="col-md-12">
+    <h2 *ngIf="!editStatus"><strong class="text-uppercase">Tạo Tin Tức</strong></h2>
+    <h2 *ngIf="editStatus"><strong class="text-uppercase">Chỉnh Sửa Tin Tức</strong></h2>
+  </div>
+</div>
+
+<div *ngIf="statusUpdate" class="alert alert-success alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>Thông Báo!</strong> {{messageUpdate}}.
+</div>
+<div *ngIf="statusUpdate === false" class="alert alert-danger alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>Thông Báo!</strong> {{messageUpdate}}.
+</div>
+
+<div class="op animated fadeInRight row">
+  <form [formGroup]="createNewsForm" (ngSubmit)="doCreateNews($event)">
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="sel1">Danh Mục <span class="importand-contend">(*)</span></label>
+        <select formControlName="category" class="form-control" id="sel1" (change)="filterChangedCategory($event.target.value)">
+                <option *ngFor="let category of listCategory" [attr.value]="category.categoryId">{{category.categoryName}}</option>
+            </select>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="email">Tên Tiêu Đề <span class="importand-contend">(*)</span></label>
+        <input formControlName="newstitle" type="text" class="form-control" id="email">
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="pwd">Mô Tả <span class="importand-contend">(*)</span></label>
+        <ckeditor formControlName="newsDescription" debounce="500">
+        </ckeditor>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="sel1">Video Hiển Thị</label>
+        <select formControlName="image" class="form-control" id="sel1">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="sel1">Image Hiển Thị <span class="importand-contend">(*)</span></label>
+        <select formControlName="video" class="form-control" id="sel1">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="sel1">Độ Ưu Tiên <span class="importand-contend">(*)</span></label>
+        <select formControlName="priorityLevel" class="form-control" id="sel1">
+          <option value="1">Nổi Bật Nhất</option>
+          <option value="2">Bài Viết Thường</option>
+          <option value="3">Không Quan Trọng</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="sel1">Trạng Thái <span class="importand-contend">(*)</span></label>
+        <select formControlName="statusNews" class="form-control" id="sel1">
+          <option value="1">Hiển Thị</option>
+          <option value="2">Ẩn</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="email">Tác Giả</label>
+        <input formControlName="author" type="email" class="form-control" id="email">
+      </div>
+    </div>
+
+    <div class="col-md-12 text-center">
+      <button *ngIf="!editStatus" type="submit" [disabled]="!createNewsForm.valid" class="btn btn-success">Tạo Mới</button>
+      <button *ngIf="editStatus" type="submit" [disabled]="!createNewsForm.valid" class="btn btn-success">Cập Nhật</button>
+    </div>
+  </form>
+</div>
+
+<!-- Modal -->
